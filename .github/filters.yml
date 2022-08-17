@@ -1,0 +1,9 @@
+# File Format
+# <aws-lambda-function-name>:
+#  - '<path-to-code>'
+#
+
+function_one:
+  - 'lambdas/function_one/FunctionTwo/**/*'
+function_two:
+  - 'lambdas/function_two/FunctionTwo/**/*'

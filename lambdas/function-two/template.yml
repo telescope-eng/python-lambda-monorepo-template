@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+
+Globals:
+  Function:
+    Timeout: 600
+
+Parameters:
+  env:
+    Type: String
+    Description: Lambda execution environment
+    Default: local
+
+Resources:
+  FunctionTwo:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.handler
+      Runtime: python3.9
+      Role: arn:aws:iam::111111111111:role/FunctionTwo
+      PackageType: Zip
+      CodeUri: FunctionTwo
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          env: !Ref env

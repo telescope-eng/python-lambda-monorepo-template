@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+
+Globals:
+  Function:
+    Timeout: 600
+
+Parameters:
+  env:
+    Type: String
+    Description: Lambda execution environment
+    Default: local
+
+Resources:
+  FunctionOne:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.handler
+      Runtime: python3.9
+      Role: arn:aws:iam::111111111111:role/FunctionOne
+      PackageType: Zip
+      CodeUri: ./lambdas/function-one/FunctionOne
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          env: !Ref env
+  FunctionTwo:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.handler
+      Runtime: python3.9
+      Role: arn:aws:iam::111111111111:role/FunctionTwo
+      PackageType: Zip
+      CodeUri: ./lambdas/function-two/FunctionTwo
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          env: !Ref env

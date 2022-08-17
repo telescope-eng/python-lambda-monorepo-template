@@ -1,0 +1,4 @@
+-r requirements.txt
+
+# E.g boto is present in all lambda executions envs so only required for local testing
+# boto3==1.24.51

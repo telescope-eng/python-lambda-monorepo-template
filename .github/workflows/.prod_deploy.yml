@@ -1,0 +1,35 @@
+#name: Production Deployment from Github to AWS Lambda
+#on:
+#  push:
+#    branches:
+#      - master # run prod deployment on all pushes to master
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@master
+#
+#      - name: Setup Python
+#        uses: actions/setup-python@v3
+#        with:
+#          python-version: "3.9.6"
+#
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+#          aws-region: eu-west-1
+#
+#      - name: Check for Changes - Lambdas
+#        uses: dorny/paths-filter@v2.2.1
+#        id: filter
+#        with:
+#          filters: .github/filters.yml
+#
+#      - name: Deploy Lambdas
+#        uses: blombard/lambda-monorepo@master
+#        with:
+#          lambda-functions: '${{ toJson(steps.filter.outputs) }}'
+#          zip-params: '*'
